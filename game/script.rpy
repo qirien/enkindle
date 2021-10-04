@@ -12,6 +12,7 @@ label start:
 
     $ current_room = "CabinInterior"
     "Every time I come to the cabin, it brings back memories..."
+    window auto hide
 
     $ in_room = True
     $ renpy.call_screen(current_room + "Screen")

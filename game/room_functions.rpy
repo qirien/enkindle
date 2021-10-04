@@ -11,8 +11,7 @@ label ChangeRoom:
  
     #Enter the scene
     $ in_room = False
-    $ renpy.scene()
-    $renpy.show(current_room)
+    $ renpy.show_screen(current_room + "Screen")
  
     #React to entrance
     if current_room != previous_room:
@@ -21,6 +20,7 @@ label ChangeRoom:
  
     #Enable scene interactivity
     $ in_room = True
+    window auto hide
     $ renpy.call_screen(current_room + "Screen")
     return
 

@@ -6,8 +6,9 @@ label EnterCabinInterior:
 
 screen CabinInteriorScreen():
     frame:
+        background "cabininterior"
         xfill True
         yfill True
         vbox:
-            textbutton "Go Outside" action [SensitiveIf(in_room), SetVariable("current_room", "CabinExterior"), Jump("ChangeRoom")]
+            textbutton "Go Outside" sensitive in_room action [SetVariable("current_room", "CabinExterior"), Jump("ChangeRoom")]
 
