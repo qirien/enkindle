@@ -10,5 +10,7 @@ screen CabinInteriorScreen():
         xfill True
         yfill True
         vbox:
+            xalign 1.0
+            yalign 0.5
             textbutton "Go Outside" sensitive in_room action [SetVariable("current_room", "CabinExterior"), Jump("ChangeRoom")]
 
