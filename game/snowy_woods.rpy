@@ -1,14 +1,14 @@
 # Snowy Woods
 
 label EnterSnowyWoods:
-    "Farther from the cabin, the trees get thicker. Thick enough to hide just about anything."
     return
 
 screen SnowyWoodsScreen():
     frame:
         background "snowywoods"
-        xfill True
-        yfill True
-        vbox:
-            textbutton "Go West" sensitive in_room action [SetVariable("current_room", "CabinExterior"), Jump("ChangeRoom")]
-            textbutton "Go East" sensitive in_room action [SetVariable("current_room", "SnowyHill"), Jump("ChangeRoom")]
+        hbox:
+            xfill True
+            yfill True
+            textbutton "Go West"  yalign 0.5 xalign 0.0 sensitive in_room action [SetVariable("current_room", "CabinExterior"), Jump("ChangeRoom")]
+            textbutton "Go East"  yalign 0.5 xalign 1.0 sensitive in_room action [SetVariable("current_room", "SnowyHill"), Jump("ChangeRoom")]
+        use inventory_screen

@@ -3,13 +3,7 @@
 # This code is in the public domain.
 # 
 
-init -100 python:
-    class Item:
-        def __init__(self, name, description):
-            self.name = name
-            self.description = description
-
-            
+init -100 python:  
     # Ordered dictionary storing name and quantity
     # {name: {quantity:, order:}}
     class Inventory(dict):
@@ -29,7 +23,7 @@ init -100 python:
         def addItem(self, name, quantity=1):
             assert quantity >= 0
             self._ensure_item_exists(name)
-            self[name]["quantity"] += quantity
+            self[name]["quantity"] = self[name]["quantity"] + quantity
             return self[name]["quantity"]
 
         def removeItem(self, name, quantity=1):

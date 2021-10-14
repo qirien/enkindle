@@ -1,7 +1,7 @@
 # Cabin Exterior
 
 label EnterCabinExterior:
-    "As the door latches shut behind me, a cold wind brushes against me and slips under my jacket right next to my skin."
+    #room description goes here
     return
 
 screen CabinExteriorScreen():
@@ -22,5 +22,14 @@ screen CabinExteriorScreen():
             hbox:
                 xalign 0.8
                 yalign 0.8
-                textbutton "Axe" action inventory.addItem("axe")
-            
+                textbutton "Axe" action AddItem("axe") #TODO: also delete the axe so we can't pickup 1000 of them
+        use inventory_screen
+
+init python:
+    def add_item(name, quantity=1):
+        global inventory
+        inventory.addItem(name, quantity)
+        renpy.restart_interaction()
+        return
+
+    AddItem = renpy.curry(add_item)
