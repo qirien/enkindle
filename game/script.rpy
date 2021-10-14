@@ -13,7 +13,6 @@ define items = {
     "wood":"Wood for the fire. Perfect.",
     "blanket": "This was mom’s favorite blanket. She used to curl up by the fire under this thing. Perfect for snuggling. Too bad it’s all yucky now.",
     "doll": "My sister’s favorite doll. She must have tried to hide it out here where it would be safe.",
-    "wolves": "The wolves must be hunting. How cute! They know better than to come near us, I’m sure.",
     "flint":"This flint will help start the fire. It looks so pretty when struck. I can use this and the axe head as a firestarter."
 }
 

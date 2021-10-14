@@ -24,12 +24,3 @@ screen CabinExteriorScreen():
                 yalign 0.8
                 textbutton "Axe" action AddItem("axe") #TODO: also delete the axe so we can't pickup 1000 of them
         use inventory_screen
-
-init python:
-    def add_item(name, quantity=1):
-        global inventory
-        inventory.addItem(name, quantity)
-        renpy.restart_interaction()
-        return
-
-    AddItem = renpy.curry(add_item)

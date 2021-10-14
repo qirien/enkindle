@@ -40,3 +40,14 @@ init -100 python:
                 list(self.values()),
                 key=lambda item: item["order"]
             )
+
+init python:
+    def add_item(name, quantity=1):
+        global inventory
+        inventory.addItem(name, quantity)
+        if (items[name]):
+            renpy.call("narrate", items[name])
+        renpy.restart_interaction()
+        return
+
+    AddItem = renpy.curry(add_item)

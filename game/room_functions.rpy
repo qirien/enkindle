@@ -38,3 +38,11 @@ init python:
         if has_intro:
             renpy.call(enter_room_label)
         return
+
+label narrate(words):
+    $ in_room = False
+    $ renpy.show_screen(current_room + "Screen")
+    $ renpy.say(None, words)
+    $ in_room = True
+    $ renpy.call_screen(current_room + "Screen")
+    return
