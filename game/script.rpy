@@ -50,19 +50,19 @@ label lit_fire:
 label choose_language:
     # TODO: make a separate screen and go through a loop of available languages
     menu:
-        "What language would you like?"
+        "Which language?"
         "English":
             $ renpy.change_language(None)
-        "Español":
-            $ renpy.change_language("espanol")
         "Esperanto":
             $ renpy.change_language("esperanto")
-        "Français":
-            $ renpy.change_language("francais")
-        "Deutsch":
-            $ renpy.change_language("deutsch")
-        "{font=fonts/unifont.ttf}日本語{/font}":
-            $ renpy.change_language("japanese")
+        # "Español":
+        #     $ renpy.change_language("espanol")            
+        # "Français":
+        #     $ renpy.change_language("francais")
+        # "Deutsch":
+        #     $ renpy.change_language("deutsch")
+        # "{font=fonts/unifont.ttf}日本語{/font}":
+        #     $ renpy.change_language("japanese")
         
 
     return

@@ -289,6 +289,7 @@ style quick_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
+# TODO: replace with images
 screen navigation():
 
     vbox:

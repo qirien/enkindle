@@ -23,16 +23,16 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "1.0"
+define config.version = "0.7"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
-This game is by {url=http://metasepiagames.com}Metasepia Games{/url} and is released under the GPL v3.0 license.
+This game is by {a=http://metasepiagames.com}Metasepia Games{/a} and is released under the GPL v3.0 license.
 
-To add more translations, please contact us at metasepia@icecavern.net
+To add more translations, please contact us at {a=mailto:metasepia@icecavern.net}metasepia@icecavern.net{/a}
 """)
 
 
