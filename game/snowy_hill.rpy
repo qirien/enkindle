@@ -12,7 +12,10 @@ screen SnowyHillScreen():
             textbutton "Go West" sensitive in_room action [SetVariable("current_room", "SnowyWoods"), Jump("ChangeRoom")]
             hbox:
                 textbutton "Wolves" action Call("narrate", "The wolves must be hunting. How cute! They know better than to come near us, I’m sure.")
-                textbutton "Flint" action AddItem("flint")
-                textbutton "Doll" action AddItem("doll")
-                textbutton "Kindling" action AddItem("kindling")
+                if (not inventory.hasItem("flint")):
+                    textbutton "Flint" action AddItem("flint")
+                if (not inventory.hasItem("doll")):
+                    textbutton "Doll" action AddItem("doll")
+                if (not inventory.hasItem("kindling")):
+                    textbutton "Kindling" action AddItem("kindling")
         use inventory_screen

@@ -22,5 +22,6 @@ screen CabinExteriorScreen():
             hbox:
                 xalign 0.8
                 yalign 0.8
-                textbutton "Axe" action AddItem("axe") #TODO: also delete the axe so we can't pickup 1000 of them
+                if (not inventory.hasItem("axe")):
+                    textbutton "Axe" action AddItem("axe")
         use inventory_screen
