@@ -171,6 +171,8 @@ define gui.button_text_insensitive_color = gui.insensitive_color
 ## is right).
 define gui.button_text_xalign = 0.0
 
+#define gui.button_background = "#000000"
+
 
 ## These variables override settings for different kinds of buttons. Please see
 ## the gui documentation for the kinds of buttons available, and what each is
@@ -209,9 +211,9 @@ define gui.choice_button_borders = Borders(150, 8, 150, 8)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = "#cccccc"
+define gui.choice_button_text_idle_color = "#555555"
 define gui.choice_button_text_hover_color = "#ffffff"
-define gui.choice_button_text_insensitive_color = "#444444"
+define gui.choice_button_text_insensitive_color = "#aaaaaa"
 
 
 ## File Slot Buttons ###########################################################

@@ -30,6 +30,9 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
+This game is by {url=http://metasepiagames.com}Metasepia Games{/url} and is released under the GPL v3.0 license.
+
+To add more translations, please contact us at metasepia@icecavern.net
 """)
 
 
@@ -47,7 +50,7 @@ define build.name = "Ignite"
 
 define config.has_sound = True
 define config.has_music = True
-define config.has_voice = True
+define config.has_voice = False
 
 
 ## To allow the user to play a test sound on the sound or voice channel,
@@ -205,4 +208,4 @@ init python:
 ## The username and project name associated with an itch.io project, separated
 ## by a slash.
 
-# define build.itch_project = "renpytom/test-project"
+# define build.itch_project = "qirien/ignite"

@@ -15,6 +15,12 @@ define items = {
     "doll":_("My sister’s favorite doll. She must have tried to hide it out here where it would be safe."),
     "flint":_("This flint will help start the fire. It looks so pretty when struck. I can use this and the axe head as a firestarter.")
 }
+define wolf_description = _("The wolves must be hunting. How cute! They know better than to come near us, I’m sure.")
+define kindling_msg = _("I need kindling.")
+define flint_msg = _("I need something to make sparks.")
+define axe_msg = _("I need something steel to strike sparks.")
+define wood_msg = _("I need wood to burn.")
+
 
 label start:
     if (not persistent.languages):
@@ -42,17 +48,21 @@ label lit_fire:
     return
 
 label choose_language:
+    # TODO: make a separate screen and go through a loop of available languages
     menu:
         "What language would you like?"
         "English":
-            $ config.language = None
+            $ renpy.change_language(None)
         "Español":
-            $ config.language = "es"
+            $ renpy.change_language("espanol")
         "Esperanto":
-            $ config.language = "esperanto"
+            $ renpy.change_language("esperanto")
         "Français":
-            $ config.language = "fr"
+            $ renpy.change_language("francais")
         "Deutsch":
-            $ config.language = "de"
+            $ renpy.change_language("deutsch")
+        "{font=fonts/unifont.ttf}日本語{/font}":
+            $ renpy.change_language("japanese")
+        
 
     return

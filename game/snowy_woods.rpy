@@ -14,6 +14,7 @@ screen SnowyWoodsScreen():
                 textbutton "Go West"  yalign 0.5 xalign 0.0 sensitive in_room action [SetVariable("current_room", "CabinExterior"), Jump("ChangeRoom")]
                 textbutton "Go East"  yalign 0.5 xalign 1.0 sensitive in_room action [SetVariable("current_room", "SnowyHill"), Jump("ChangeRoom")]
             hbox:
+                textbutton "Wolves" action Call("narrate", wolf_description)
                 if (not inventory.hasItem("wood")):
                     textbutton "Wood" yalign 1.0 xalign 0.0 action AddItem("wood")
                 if (not inventory.hasItem("blanket")):

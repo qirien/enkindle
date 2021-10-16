@@ -2,13 +2,13 @@ init python:
     def start_fire():
         global inventory
         if (not inventory.hasItem("kindling")):
-            renpy.call("narrate", _("I need kindling."))
+            renpy.call("narrate", kindling_msg)
         elif (not inventory.hasItem("flint")):
-            renpy.call("narrate",_("I need something to make sparks."))
+            renpy.call("narrate",flint_msg)
         elif (not inventory.hasItem("axe")):
-            renpy.call("narrate",_("I need something steel to strike sparks."))
+            renpy.call("narrate", axe_msg)
         elif (not inventory.hasItem("wood")):
-            renpy.call("narrate", _("I need wood to burn."))
+            renpy.call("narrate", wood_msg)
         else:
             renpy.jump("lit_fire")
         return
