@@ -41,6 +41,11 @@ init -100 python:
                 key=lambda item: item["order"]
             )
 
+        def hasItem(self, name):
+            if (self[name]):
+                return (self[name]["quantity"] > 0)
+            return False
+
 init python:
     def add_item(name, quantity=1):
         global inventory

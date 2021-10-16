@@ -16,5 +16,5 @@ screen CabinInteriorScreen():
                 action [SetVariable("current_room", "CabinExterior"), Jump("ChangeRoom")]
                 xalign 1.0
                 yalign 0.5
-            textbutton "Light a Fire" xalign 0.5 
+            textbutton "Light a Fire" xalign 0.5 action StartFire() 
         use inventory_screen
