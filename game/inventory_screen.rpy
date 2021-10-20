@@ -9,7 +9,9 @@ screen inventory_screen():
             text " "    
         hbox:        
             spacing 10
-            label "Inventory"
+            #label "Inventory"
             for i in inventory:
-                    textbutton i tooltip items[i] action NullAction()
-                    # TODO: when you click/mouseover, display description
+                imagebutton:
+                    idle im.FactorScale(i+".png", 0.25)
+                    tooltip items[i] 
+                    action NullAction()

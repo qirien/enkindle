@@ -1,3 +1,10 @@
+init -100:
+    transform highlight_imagebutton():
+        on hover:
+            additive 0.2
+        on idle:
+            additive 0.0 
+
 init python:
     def start_fire():
         global inventory
