@@ -146,7 +146,7 @@ default preferences.afm_time = 15
 ## literal string, not an expression.
 
 define config.save_directory = "Ignite-1633118577"
-
+define config.has_quicksave = False
 
 ## Icon ########################################################################
 ##

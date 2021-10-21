@@ -235,41 +235,6 @@ style choice_button_text is default:
     properties gui.button_text_properties("choice_button")
 
 
-## Quick Menu screen ###########################################################
-##
-## The quick menu is displayed in-game to provide easy access to the out-of-game
-## menus.
-
-screen quick_menu():
-
-    ## Ensure this appears on top of other screens.
-    zorder 100
-
-    if quick_menu:
-
-        hbox:
-            style_prefix "quick"
-
-            xalign 0.5
-            yalign 1.0
-
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
-
-
-## This code ensures that the quick_menu screen is displayed in-game, whenever
-## the player has not explicitly hidden the interface.
-init python:
-    config.overlay_screens.append("quick_menu")
-
-default quick_menu = False
-
 style quick_button is default
 style quick_button_text is button_text
 
@@ -292,48 +257,29 @@ style quick_button_text:
 # TODO: replace with images
 screen navigation():
 
-    vbox:
-        style_prefix "navigation"
+    style_prefix "navigation"
 
-        xpos gui.navigation_xpos
-        yalign 0.5
+    if main_menu:
+        imagebutton:
+            idle "gui/right_arrow.png"
+            action Start()
+            xpos 900
+            ypos 550
+            at alpha_imagebutton
+    else:
+        imagebutton:
+            idle "gui/right_arrow.png"
+            action Return()
+            xpos 100
+            ypos 600
+            at alpha_imagebutton        
 
-        spacing gui.navigation_spacing
 
-        if main_menu:
+    textbutton ("Save") action ShowMenu("Save") xpos 100 ypos 200
+    textbutton ("Load") action ShowMenu("Load") xpos 100 ypos 300
+    textbutton _("Preferences") action ShowMenu("preferences") xpos 100 ypos 400
 
-            textbutton _("Start") action Start()
-
-        else:
-
-            textbutton _("History") action ShowMenu("history")
-
-            textbutton _("Save") action ShowMenu("save")
-
-        textbutton _("Load") action ShowMenu("load")
-
-        textbutton _("Preferences") action ShowMenu("preferences")
-
-        if _in_replay:
-
-            textbutton _("End Replay") action EndReplay(confirm=True)
-
-        elif not main_menu:
-
-            textbutton _("Main Menu") action MainMenu()
-
-        textbutton _("About") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
-
-        if renpy.variant("pc"):
-
-            ## The quit button is banned on iOS and unnecessary on Android and
-            ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+    textbutton _("About") action ShowMenu("about") xpos 100 ypos 500
 
 
 style navigation_button is gui_button
@@ -389,8 +335,6 @@ style main_menu_version is main_menu_text
 style main_menu_frame:
     xsize 420
     yfill True
-
-    background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
     xalign 1.0
@@ -474,15 +418,10 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     use navigation
 
-    textbutton _("Return"):
-        style "return_button"
-
-        action Return()
-
     label title
 
     if main_menu:
-        key "game_menu" action ShowMenu("main_menu")
+        key "game_menu" action ShowMenu("preferences")
 
 
 style game_menu_outer_frame is empty
@@ -501,8 +440,6 @@ style return_button_text is navigation_button_text
 style game_menu_outer_frame:
     bottom_padding 45
     top_padding 180
-
-    background "gui/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
     xsize 420
@@ -600,7 +537,7 @@ screen load():
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
+    default page_name_value = FilePageNameInputValue(pattern=_("{}"), auto=_("Automatic saves"), quick=_("Quick saves"))
 
     use game_menu(title):
 
@@ -642,7 +579,7 @@ screen file_slots(title):
 
                         add FileScreenshot(slot) xalign 0.5
 
-                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("empty slot")):
+                        text FileTime(slot, format=_("{#file_time}%Y-%m-%d, %H:%M"), empty="--------"):
                             style "slot_time_text"
 
                         text FileSaveName(slot):
@@ -668,7 +605,7 @@ screen file_slots(title):
                     textbutton _("{#quick_page}Q") action FilePage("quick")
 
                 ## range(1, 10) gives the numbers from 1 to 9.
-                for page in range(1, 10):
+                for page in range(1, 6):
                     textbutton "[page]" action FilePage(page)
 
                 textbutton _(">") action FilePageNext()
@@ -719,86 +656,13 @@ screen preferences():
 
     use game_menu(_("Preferences"), scroll="viewport"):
 
-        vbox:
-
-            hbox:
-                box_wrap True
-
-                if renpy.variant("pc") or renpy.variant("web"):
-
-                    vbox:
-                        style_prefix "radio"
-                        label _("Display")
-                        textbutton _("Window") action Preference("display", "window")
-                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
-
                 vbox:
-                    style_prefix "radio"
-                    label _("Rollback Side")
-                    textbutton _("Disable") action Preference("rollback side", "disable")
-                    textbutton _("Left") action Preference("rollback side", "left")
-                    textbutton _("Right") action Preference("rollback side", "right")
-
-                vbox:
-                    style_prefix "check"
-                    label _("Skip")
-                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("After Choices") action Preference("after choices", "toggle")
-                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
-
-                ## Additional vboxes of type "radio_pref" or "check_pref" can be
-                ## added here, to add additional creator-defined preferences.
-
-            null height (4 * gui.pref_spacing)
-
-            hbox:
-                style_prefix "slider"
-                box_wrap True
-
-                vbox:
-
-                    label _("Text Speed")
-
-                    bar value Preference("text speed")
-
-                    label _("Auto-Forward Time")
-
-                    bar value Preference("auto-forward time")
-
-                vbox:
-
-                    if config.has_music:
-                        label _("Music Volume")
-
-                        hbox:
-                            bar value Preference("music volume")
-
-                    if config.has_sound:
-
-                        label _("Sound Volume")
-
-                        hbox:
-                            bar value Preference("sound volume")
-
-                            if config.sample_sound:
-                                textbutton _("Test") action Play("sound", config.sample_sound)
-
-
-                    if config.has_voice:
-                        label _("Voice Volume")
-
-                        hbox:
-                            bar value Preference("voice volume")
-
-                            if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
-
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
-
-                        textbutton _("Mute All"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+                    textbutton "Mute Music":
+                        action Preference("mixer music mute", "toggle")
+                        style "mute_all_button"
+                    textbutton "Mute Sound":
+                        action Preference("mixer sound mute", "toggle")
+                        style "mute_all_button"
 
 
 style pref_label is gui_label
@@ -1452,7 +1316,6 @@ style nvl_window:
 
 style main_menu_frame:
     variant "small"
-    background "gui/phone/overlay/main_menu.png"
 
 style game_menu_outer_frame:
     variant "small"

@@ -4,14 +4,17 @@ screen inventory_screen():
         xfill True
         $ tooltip = GetTooltip()
         if tooltip:
-            text "[tooltip]"
+            text "[tooltip]" color "FFFFFF"
         else:
             text " "    
         hbox:        
             spacing 10
             #label "Inventory"
-            for i in inventory:
+            $ sorted_items = inventory.toList()
+            for i in sorted_items:
                 imagebutton:
-                    idle im.FactorScale(i+".png", 0.25)
-                    tooltip items[i] 
+                    sensitive in_room
+                    idle "images/" + i["name"]+".png"
+                    tooltip items[i["name"]] 
                     action NullAction()
+                    at icon_size

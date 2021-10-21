@@ -16,18 +16,19 @@ define items = {
     "flint":_("This flint will help start the fire. It looks so pretty when struck. I can use this and the axe head as a firestarter.")
 }
 define wolf_description = _("The wolves must be hunting. How cute! They know better than to come near us, I’m sure.")
-define kindling_msg = _("I need kindling.")
-define flint_msg = _("I need something to make sparks.")
-define axe_msg = _("I need something steel to strike sparks.")
-define wood_msg = _("I need wood to burn.")
-
+define cantlight_msg = _("I don't have everything yet.")
 
 label start:
     if (not persistent.languages):
         $ persistent.languages = []
+    if (not persistent.times_played):
+        $ persistent.times_played = 0
+    $ renpy.save_persistent()
     call choose_language
 
+    #play music "music/Unsolved.mp3" loop
     $ current_room = "CabinInterior"
+    $ renpy.show_screen(current_room + "Screen")
     "It’s really cold today. I need to start a fire."
     "I need to go outside to collect what I need."
 
@@ -44,11 +45,12 @@ label lit_fire:
     # TODO: cozy fire image here
     "Ahh, this is perfect. Thanks to the fire I’m nice and warm. Nothing like a good, cozy fire to lift your spirits!"
     $ persistent.languages.append(config.language)
+    $ persistent.times_played += 1
+    $ renpy.save_persistent()
     $ renpy.full_restart()
     return
 
 label choose_language:
-    # TODO: make a separate screen and go through a loop of available languages
     menu:
         "Which language?"
         "English":
