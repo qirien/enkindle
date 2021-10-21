@@ -337,7 +337,8 @@ screen main_menu():
             text "[config.version]":
                 style "main_menu_version"
 
-        text "[persistent.times_played]" xpos 1200 ypos 800
+        if (persistent.times_played):
+            text "[persistent.times_played]" xpos 1800 ypos 1000 style "main_menu_version"
 
 
 style main_menu_frame is empty
@@ -670,14 +671,18 @@ screen preferences():
     tag menu
 
     use game_menu(_("Preferences"), scroll="viewport"):
-
-        vbox:
-            textbutton "Mute Music":
-                action Preference("mixer music mute", "toggle")
-                style "mute_all_button"
-            textbutton "Mute Sound":
-                action Preference("mixer sound mute", "toggle")
-                style "mute_all_button"
+        style_prefix "pref"
+        hbox:
+            vbox:
+                textbutton "English" action Language(None)
+                textbutton "Esperanto" action Language("esperanto")
+            vbox:
+                textbutton "Mute Music":
+                    action Preference("mixer music mute", "toggle")
+                    style "mute_all_button"
+                textbutton "Mute Sound":
+                    action Preference("mixer sound mute", "toggle")
+                    style "mute_all_button"
 
 
 style pref_label is gui_label

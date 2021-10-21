@@ -16,7 +16,9 @@ screen inventory_screen():
             $ sorted_items = inventory.toList()
             for i in sorted_items:
                 if (items[i["name"]]):
-                    $ splitted = re.split('(\!|\?|\.) ',items[i["name"]])
+                    $ full_desc = items[i["name"]]
+                    $ full_desc_translated = renpy.translate_string(full_desc)
+                    $ splitted = re.split('(\!|\?|\.)',full_desc_translated)
                     $ desc = splitted[0] + splitted[1]
                     imagebutton:
                         sensitive in_room
