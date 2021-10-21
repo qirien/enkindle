@@ -1,3 +1,6 @@
+init python:
+    import re
+
 screen inventory_screen():
     vbox:            
         yalign 1.0
@@ -12,9 +15,12 @@ screen inventory_screen():
             #label "Inventory"
             $ sorted_items = inventory.toList()
             for i in sorted_items:
-                imagebutton:
-                    sensitive in_room
-                    idle "images/" + i["name"]+".png"
-                    tooltip items[i["name"]] 
-                    action NullAction()
-                    at icon_size
+                if (items[i["name"]]):
+                    $ splitted = re.split('(\!|\?|\.) ',items[i["name"]])
+                    $ desc = splitted[0] + splitted[1]
+                    imagebutton:
+                        sensitive in_room
+                        idle "images/" + i["name"]+".png"
+                        tooltip desc
+                        action NullAction()
+                        at icon_size

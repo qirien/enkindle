@@ -19,19 +19,22 @@ define wolf_description = _("The wolves must be hunting. How cute! They know bet
 define cantlight_msg = _("I don't have everything yet.")
 
 label start:
+    $ _game_menu_screen = "preferences"
+    $_confirm_quit = False
     if (not persistent.languages):
-        $ persistent.languages = []
+        $ persistent.languages = set()
     if (not persistent.times_played):
         $ persistent.times_played = 0
     $ renpy.save_persistent()
-    call choose_language
 
     #play music "music/Unsolved.mp3" loop
     $ current_room = "CabinInterior"
     $ renpy.show_screen(current_room + "Screen")
+
+    call choose_language
+
     "It’s really cold today. I need to start a fire."
     "I need to go outside to collect what I need."
-
 
     window auto hide
 
@@ -44,7 +47,10 @@ label lit_fire:
     "It's time."
     # TODO: cozy fire image here
     "Ahh, this is perfect. Thanks to the fire I’m nice and warm. Nothing like a good, cozy fire to lift your spirits!"
-    $ persistent.languages.append(config.language)
+    if (_preferences.language == None):
+        $ persistent.languages.add("english")
+    else:
+        $ persistent.languages.add(_preferences.language)
     $ persistent.times_played += 1
     $ renpy.save_persistent()
     $ renpy.full_restart()
@@ -64,7 +70,7 @@ label choose_language:
         # "Deutsch":
         #     $ renpy.change_language("deutsch")
         # "{font=fonts/unifont.ttf}日本語{/font}":
-        #     $ renpy.change_language("japanese")
+        #     $ renpy.change_language("nihongo")
         
 
     return

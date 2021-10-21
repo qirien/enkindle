@@ -207,10 +207,25 @@ style input:
 screen choice(items):
     style_prefix "choice"
 
-    vbox:
-        for i in items:
-            textbutton i.caption action i.action
-
+    # If there's a lot of choices, display them in two columns
+    if (len(items) > 6):
+        vpgrid:
+            cols 2
+            xalign 0.5
+            spacing 5
+            yalign 0.25
+            for i in items:
+                if (i.chosen): #This allows ths user to see which choices they have made in the past
+                    textbutton i.caption action i.action style "choice_chosen" xsize 500 ysize 70
+                else:
+                    textbutton i.caption action i.action xsize 500 ysize 70
+    else:
+        vbox:
+            for i in items:
+                if (i.chosen): #This allows ths user to see which choices they have made in the past
+                    textbutton i.caption action i.action style "choice_chosen"
+                else:
+                    textbutton i.caption action i.action
 
 ## When this is true, menu captions will be spoken by the narrator. When false,
 ## menu captions will be displayed as empty buttons.
@@ -234,15 +249,12 @@ style choice_button is default:
 style choice_button_text is default:
     properties gui.button_text_properties("choice_button")
 
+style choice_chosen is choice_button#:
+    #background "#333a"
 
-style quick_button is default
-style quick_button_text is button_text
-
-style quick_button:
-    properties gui.button_properties("quick_button")
-
-style quick_button_text:
-    properties gui.button_text_properties("quick_button")
+style choice_chosen_text is choice_button_text:
+    italic True
+  
 
 
 ################################################################################
@@ -263,23 +275,23 @@ screen navigation():
         imagebutton:
             idle "gui/right_arrow.png"
             action Start()
-            xpos 900
-            ypos 550
+            xpos 100
+            ypos 700
             at alpha_imagebutton
     else:
         imagebutton:
             idle "gui/right_arrow.png"
             action Return()
             xpos 100
-            ypos 600
+            ypos 700
             at alpha_imagebutton        
 
-    if not main_menu:
-        textbutton ("Save") action ShowMenu("save") xpos 100 ypos 200
-    textbutton ("Load") action ShowMenu("load") xpos 100 ypos 300
-    textbutton _("Preferences") action ShowMenu("preferences") xpos 100 ypos 400
+    textbutton "Preferences" action ShowMenu("preferences") xpos 100 ypos 400
 
-    textbutton _("About") action ShowMenu("about") xpos 100 ypos 500
+    textbutton "About" action ShowMenu("about") xpos 100 ypos 500
+
+    if not main_menu:
+        textbutton "Main Menu" action MainMenu() xpos 100 ypos 600
 
 
 style navigation_button is gui_button
@@ -325,6 +337,8 @@ screen main_menu():
             text "[config.version]":
                 style "main_menu_version"
 
+        text "[persistent.times_played]" xpos 1200 ypos 800
+
 
 style main_menu_frame is empty
 style main_menu_vbox is vbox
@@ -337,11 +351,10 @@ style main_menu_frame:
     yfill True
 
 style main_menu_vbox:
-    xalign 1.0
+    xalign 0.5
     xoffset -30
-    xmaximum 1200
-    yalign 1.0
-    yoffset -30
+    xmaximum 500
+    yalign 0.0
 
 style main_menu_text:
     properties gui.text_properties("main_menu", accent=True)
@@ -482,7 +495,6 @@ style return_button:
 ## example of how to make a custom screen.
 
 screen about():
-
     tag menu
 
     ## This use statement includes the game_menu screen inside this one. The
@@ -492,16 +504,19 @@ screen about():
 
         style_prefix "about"
 
-        vbox:
+        frame:
+            background light_gray
+            vbox:
+                xsize 1000
 
-            label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+                label "[config.name!t]"
+                text _("Version [config.version!t]\n")
 
-            ## gui.about is usually set in options.rpy.
-            if gui.about:
-                text "[gui.about!t]\n"
+                ## gui.about is usually set in options.rpy.
+                if gui.about:
+                    text "[gui.about!t]\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+                text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 style about_label is gui_label
@@ -656,13 +671,13 @@ screen preferences():
 
     use game_menu(_("Preferences"), scroll="viewport"):
 
-                vbox:
-                    textbutton "Mute Music":
-                        action Preference("mixer music mute", "toggle")
-                        style "mute_all_button"
-                    textbutton "Mute Sound":
-                        action Preference("mixer sound mute", "toggle")
-                        style "mute_all_button"
+        vbox:
+            textbutton "Mute Music":
+                action Preference("mixer music mute", "toggle")
+                style "mute_all_button"
+            textbutton "Mute Sound":
+                action Preference("mixer sound mute", "toggle")
+                style "mute_all_button"
 
 
 style pref_label is gui_label
@@ -736,257 +751,6 @@ style slider_vbox:
     xsize 675
 
 
-## History screen ##############################################################
-##
-## This is a screen that displays the dialogue history to the player. While
-## there isn't anything special about this screen, it does have to access the
-## dialogue history stored in _history_list.
-##
-## https://www.renpy.org/doc/html/history.html
-
-screen history():
-
-    tag menu
-
-    ## Avoid predicting this screen, as it can be very large.
-    predict False
-
-    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
-
-        style_prefix "history"
-
-        for h in _history_list:
-
-            window:
-
-                ## This lays things out properly if history_height is None.
-                has fixed:
-                    yfit True
-
-                if h.who:
-
-                    label h.who:
-                        style "history_name"
-                        substitute False
-
-                        ## Take the color of the who text from the Character, if
-                        ## set.
-                        if "color" in h.who_args:
-                            text_color h.who_args["color"]
-
-                $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
-                text what:
-                    substitute False
-
-        if not _history_list:
-            label _("The dialogue history is empty.")
-
-
-## This determines what tags are allowed to be displayed on the history screen.
-
-define gui.history_allow_tags = { "alt", "noalt" }
-
-
-style history_window is empty
-
-style history_name is gui_label
-style history_name_text is gui_label_text
-style history_text is gui_text
-
-style history_text is gui_text
-
-style history_label is gui_label
-style history_label_text is gui_label_text
-
-style history_window:
-    xfill True
-    ysize gui.history_height
-
-style history_name:
-    xpos gui.history_name_xpos
-    xanchor gui.history_name_xalign
-    ypos gui.history_name_ypos
-    xsize gui.history_name_width
-
-style history_name_text:
-    min_width gui.history_name_width
-    text_align gui.history_name_xalign
-
-style history_text:
-    xpos gui.history_text_xpos
-    ypos gui.history_text_ypos
-    xanchor gui.history_text_xalign
-    xsize gui.history_text_width
-    min_width gui.history_text_width
-    text_align gui.history_text_xalign
-    layout ("subtitle" if gui.history_text_xalign else "tex")
-
-style history_label:
-    xfill True
-
-style history_label_text:
-    xalign 0.5
-
-
-## Help screen #################################################################
-##
-## A screen that gives information about key and mouse bindings. It uses other
-## screens (keyboard_help, mouse_help, and gamepad_help) to display the actual
-## help.
-
-screen help():
-
-    tag menu
-
-    default device = "keyboard"
-
-    use game_menu(_("Help"), scroll="viewport"):
-
-        style_prefix "help"
-
-        vbox:
-            spacing 23
-
-            hbox:
-
-                textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
-                textbutton _("Mouse") action SetScreenVariable("device", "mouse")
-
-                if GamepadExists():
-                    textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
-
-            if device == "keyboard":
-                use keyboard_help
-            elif device == "mouse":
-                use mouse_help
-            elif device == "gamepad":
-                use gamepad_help
-
-
-screen keyboard_help():
-
-    hbox:
-        label _("Enter")
-        text _("Advances dialogue and activates the interface.")
-
-    hbox:
-        label _("Space")
-        text _("Advances dialogue without selecting choices.")
-
-    hbox:
-        label _("Arrow Keys")
-        text _("Navigate the interface.")
-
-    hbox:
-        label _("Escape")
-        text _("Accesses the game menu.")
-
-    hbox:
-        label _("Ctrl")
-        text _("Skips dialogue while held down.")
-
-    hbox:
-        label _("Tab")
-        text _("Toggles dialogue skipping.")
-
-    hbox:
-        label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Page Down")
-        text _("Rolls forward to later dialogue.")
-
-    hbox:
-        label "H"
-        text _("Hides the user interface.")
-
-    hbox:
-        label "S"
-        text _("Takes a screenshot.")
-
-    hbox:
-        label "V"
-        text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
-
-
-screen mouse_help():
-
-    hbox:
-        label _("Left Click")
-        text _("Advances dialogue and activates the interface.")
-
-    hbox:
-        label _("Middle Click")
-        text _("Hides the user interface.")
-
-    hbox:
-        label _("Right Click")
-        text _("Accesses the game menu.")
-
-    hbox:
-        label _("Mouse Wheel Up\nClick Rollback Side")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
-
-
-screen gamepad_help():
-
-    hbox:
-        label _("Right Trigger\nA/Bottom Button")
-        text _("Advances dialogue and activates the interface.")
-
-    hbox:
-        label _("Left Trigger\nLeft Shoulder")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Right Shoulder")
-        text _("Rolls forward to later dialogue.")
-
-
-    hbox:
-        label _("D-Pad, Sticks")
-        text _("Navigate the interface.")
-
-    hbox:
-        label _("Start, Guide")
-        text _("Accesses the game menu.")
-
-    hbox:
-        label _("Y/Top Button")
-        text _("Hides the user interface.")
-
-    textbutton _("Calibrate") action GamepadCalibrate()
-
-
-style help_button is gui_button
-style help_button_text is gui_button_text
-style help_label is gui_label
-style help_label_text is gui_label_text
-style help_text is gui_text
-
-style help_button:
-    properties gui.button_properties("help_button")
-    xmargin 12
-
-style help_button_text:
-    properties gui.button_text_properties("help_button")
-
-style help_label:
-    xsize 375
-    right_padding 30
-
-style help_label_text:
-    size gui.text_size
-    xalign 1.0
-    text_align 1.0
-
-
-
 ################################################################################
 ## Additional screens
 ################################################################################
@@ -1025,8 +789,8 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 150
 
-                textbutton _("Yes") action yes_action
-                textbutton _("No") action no_action
+                textbutton "✓" action yes_action
+                textbutton "✕" action no_action
 
     ## Right-click and escape answer "no".
     key "game_menu" action no_action

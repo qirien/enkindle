@@ -1,3 +1,4 @@
+# Utility functions and variables used elsewhere
 init -100:
     transform highlight_imagebutton():
         on hover:
@@ -16,6 +17,8 @@ init -100:
     transform icon_size:
         xsize 100
         ysize 100
+
+    define light_gray = "#aaaaaa"
 
 init python:
     def start_fire():
