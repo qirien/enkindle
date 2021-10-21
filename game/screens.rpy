@@ -274,9 +274,9 @@ screen navigation():
             ypos 600
             at alpha_imagebutton        
 
-
-    textbutton ("Save") action ShowMenu("Save") xpos 100 ypos 200
-    textbutton ("Load") action ShowMenu("Load") xpos 100 ypos 300
+    if not main_menu:
+        textbutton ("Save") action ShowMenu("save") xpos 100 ypos 200
+    textbutton ("Load") action ShowMenu("load") xpos 100 ypos 300
     textbutton _("Preferences") action ShowMenu("preferences") xpos 100 ypos 400
 
     textbutton _("About") action ShowMenu("about") xpos 100 ypos 500

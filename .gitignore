@@ -12,6 +12,7 @@ tmp/*
 errors.txt
 log.txt
 traceback.txt
+progressive_download.txt
 files.txt
 game/saves
 game/cache
