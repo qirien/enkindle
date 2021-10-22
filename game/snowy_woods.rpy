@@ -1,6 +1,7 @@
 # Snowy Woods
 
 label EnterSnowyWoods:
+    play sound "sfx/walk-snow-fast.ogg"    
     return
 
 screen SnowyWoodsScreen():

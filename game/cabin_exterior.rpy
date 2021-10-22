@@ -1,7 +1,11 @@
 # Cabin Exterior
 
 label EnterCabinExterior:
-    #room description goes here
+    #Play whichever sound if appropriate
+    if (previous_room == "SnowyHill"):
+        play sound "sfx/walk-snow-fast.ogg"
+    if (previous_room == "CabinInterior"):
+        play sound "sfx/close-door.ogg"
     return
 
 screen CabinExteriorScreen():

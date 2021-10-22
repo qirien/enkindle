@@ -49,6 +49,7 @@ init -100 python:
 init python:
     def add_item(name, quantity=1):
         global inventory
+        renpy.play("sfx/snow-grab.ogg", "sound")        
         inventory.addItem(name, quantity)
         if (items[name]):
             renpy.call("narrate", items[name])

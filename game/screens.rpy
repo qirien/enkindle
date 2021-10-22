@@ -501,7 +501,7 @@ screen about():
     ## This use statement includes the game_menu screen inside this one. The
     ## vbox child is then included inside the viewport inside the game_menu
     ## screen.
-    use game_menu(_("About"), scroll="viewport"):
+    use game_menu("About", scroll="viewport"):
 
         style_prefix "about"
 
@@ -541,14 +541,14 @@ screen save():
 
     tag menu
 
-    use file_slots(_("Save"))
+    use file_slots("Save")
 
 
 screen load():
 
     tag menu
 
-    use file_slots(_("Load"))
+    use file_slots("Load")
 
 
 screen file_slots(title):
@@ -670,12 +670,9 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu("Preferences", scroll="viewport"):
         style_prefix "pref"
         hbox:
-            vbox:
-                textbutton "English" action Language(None)
-                textbutton "Esperanto" action Language("esperanto")
             vbox:
                 textbutton "Mute Music":
                     action Preference("mixer music mute", "toggle")
@@ -683,6 +680,7 @@ screen preferences():
                 textbutton "Mute Sound":
                     action Preference("mixer sound mute", "toggle")
                     style "mute_all_button"
+                use choose_language_screen
 
 
 style pref_label is gui_label

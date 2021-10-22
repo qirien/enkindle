@@ -33,6 +33,33 @@ define gui.about = _p("""
 This game is by {a=http://metasepiagames.com}Metasepia Games{/a} and is released under the GPL v3.0 license.
 
 To add more translations, please contact us at {a=mailto:metasepia@icecavern.net}metasepia@icecavern.net{/a}
+
+Content by Clarissa Helps and Andrea Landaker
+
+Esperanto by Rachel Helps
+
+French by Wes Landaker
+
+Japanese by Clarissa Helps
+
+Spanish by Andrea Landaker
+
+Dutch by Milo
+
+Korean by Hyunhee Bae
+
+Shakespearean by Andrea Landaker
+
+Music by Nicolas Jeudy, {a=http://darkfantasystudio.com/}Dark Fantasy Studio{/a}
+
+Sound Effects by {a=http://www.soundjay.com}SoundJay{/a} and {a=http://freesound.org}Freesound{/a}
+
+Programming by Andrea Landaker
+
+Art by Clarissa Helps
+
+
+
 """)
 
 

@@ -1,4 +1,13 @@
 ﻿# The script of the game goes in this file.
+define language_name_map = {
+    None:"English", 
+    "esperanto":"Esperanto", 
+    "nihongo":"{font=[japanese_font]}日本語{/font}",
+    "french":"Français",
+    "espanol":"Español",
+    "korean":"{font=[korean_font]}한국어{/font}",
+    "thai":"{font=[thai_font]}ภาษาไทย{/font}"
+    }
 
 # Variables that should be saved
 default current_room = "CabinInterior"
@@ -27,8 +36,9 @@ label start:
         $ persistent.times_played = 0
     $ renpy.save_persistent()
 
-    #play music "music/Unsolved.mp3" loop
+    play music "music/Unsolved.mp3" loop
     $ current_room = "CabinInterior"
+    $ previous_room = "CabinInterior"
     $ renpy.show_screen(current_room + "Screen")
 
     call choose_language
@@ -45,6 +55,7 @@ label start:
 
 label lit_fire:
     "It's time."
+    play sound "sfx/light-fire.ogg"
     # TODO: cozy fire image here
     "Ahh, this is perfect. Thanks to the fire I’m nice and warm. Nothing like a good, cozy fire to lift your spirits!"
     if (_preferences.language == None):
@@ -57,20 +68,26 @@ label lit_fire:
     return
 
 label choose_language:
-    menu:
-        "Which language?"
-        "English":
-            $ renpy.change_language(None)
-        "Esperanto":
-            $ renpy.change_language("esperanto")
-        # "Español":
-        #     $ renpy.change_language("espanol")            
-        # "Français":
-        #     $ renpy.change_language("francais")
-        # "Deutsch":
-        #     $ renpy.change_language("deutsch")
-        # "{font=fonts/unifont.ttf}日本語{/font}":
-        #     $ renpy.change_language("nihongo")
-        
+    call screen choose_language_screen()
 
     return
+
+screen choose_language_screen:
+    style_prefix "choice"
+
+    vpgrid:
+        cols 2
+        xalign 0.5
+        spacing 5
+        yalign 0.25
+        if (None in persistent.languages):
+            textbutton "English" action [Language(None), Return()] style "choice_chosen" xsize 500 ysize 70
+        else:
+            textbutton "English" action [Language(None), Return()] xsize 500 ysize 70
+        $ languages_available = renpy.known_languages()
+        for i in languages_available:
+            $ nice_name = language_name_map[i]
+            if (i in persistent.languages): #This allows ths user to see which choices they have made in the past            
+                textbutton nice_name action [Language(i), Return()] style "choice_chosen" xsize 500 ysize 70
+            else:
+                textbutton nice_name action [Language(i), Return()] xsize 500 ysize 70

@@ -19,6 +19,9 @@ init -100:
         ysize 100
 
     define light_gray = "#aaaaaa"
+    define japanese_font = "fonts/NotoSerifJP-Regular.otf"
+    define korean_font = "fonts/NotoSerifKR-Regular.otf"
+    define thai_font = "fonts/NotoSerifThai-Regular.ttf"
 
 init python:
     def start_fire():

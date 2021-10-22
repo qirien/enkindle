@@ -1,6 +1,8 @@
 # Cabin Interior
 
 label EnterCabinInterior:
+    if (previous_room == "CabinExterior"):
+        play sound "sfx/open-door.ogg"
     return
 
 screen CabinInteriorScreen():

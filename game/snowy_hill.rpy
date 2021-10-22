@@ -1,6 +1,11 @@
 # Snowy Hill
 
 label EnterSnowyHill:
+    #Play whichever sound if appropriate
+    if (previous_room == "CabinExterior"):
+        play sound "sfx/walk-snow-slow.ogg"
+    else:
+        play sound "sfx/walk-snow-fast.ogg"
     return
 
 screen SnowyHillScreen():
