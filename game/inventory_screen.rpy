@@ -18,11 +18,11 @@ screen inventory_screen():
                 if (items[i["name"]]):
                     $ full_desc = items[i["name"]]
                     $ full_desc_translated = renpy.translate_string(full_desc)
-                    $ splitted = re.split('(\!|\?|\.)',full_desc_translated)
+                    $ splitted = re.split('(\u\!|\?|\.|。)',full_desc_translated)
                     $ desc = splitted[0] + splitted[1]
                     imagebutton:
                         sensitive in_room
                         idle "images/" + i["name"]+".png"
                         tooltip desc
                         action NullAction()
-                        at icon_size
+                        at icon_size, highlight_imagebutton

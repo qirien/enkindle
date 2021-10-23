@@ -44,4 +44,8 @@ screen SnowyWoodsScreen():
                 pos (845, 644)
                 at highlight_imagebutton
 
+        if (has_fire_items()):
+            add "heavy_snow"
+        else:
+            add "snow"
         use inventory_screen

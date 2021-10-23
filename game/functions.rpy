@@ -1,6 +1,9 @@
 # Utility functions and variables used elsewhere
 init -100:
+    # TODO: this doesn't work for inventory items.
     transform highlight_imagebutton():
+        on default:
+            additive 0.0
         on hover:
             additive 0.2
         on idle:
@@ -24,9 +27,14 @@ init -100:
     define thai_font = "fonts/NotoSerifThai-Regular.ttf"
 
 init python:
+    def has_fire_items():
+        global inventory
+        return (inventory.hasItem("kindling") and inventory.hasItem("flint") and inventory.hasItem("axe") and inventory.hasItem("wood"))
+    
+    # Start the fire if we have what we need, otherwise say something.
     def start_fire():
         global inventory
-        if (inventory.hasItem("kindling") and inventory.hasItem("flint") and inventory.hasItem("axe") and inventory.hasItem("wood")):
+        if has_fire_items():
             renpy.jump("lit_fire")
         else:
             renpy.call("narrate",cantlight_msg)

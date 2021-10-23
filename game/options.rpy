@@ -91,7 +91,7 @@ define config.has_voice = False
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-# define config.main_menu_music = "main-menu-theme.ogg"
+define config.main_menu_music = ["music/Unsolved.mp3", "<silence 10.0>", "music/Inspector.mp3", "<silence 10.0>"]
 
 
 ## Transitions #################################################################

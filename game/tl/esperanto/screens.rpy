@@ -44,19 +44,19 @@ translate esperanto strings:
 
     # game/screens.rpy:314
     old "Preferences"
-    new ""
+    new "Preferoj"
 
     # game/screens.rpy:318
     old "End Replay"
     new ""
 
     # game/screens.rpy:322
-    old "Main Menu"
+    old "Ĉefa Menuo"
     new ""
 
     # game/screens.rpy:324
     old "About"
-    new ""
+    new "Pri"
 
     # game/screens.rpy:329
     old "Help"
@@ -337,4 +337,16 @@ translate esperanto strings:
     # game/screens.rpy:1433
     old "Menu"
     new ""
+
+# TODO: Translation updated at 2021-10-21 14:10
+
+translate esperanto strings:
+
+    # game/screens.rpy:556
+    old "{}"
+    new "{}"
+
+    # game/screens.rpy:598
+    old "{#file_time}%Y-%m-%d, %H:%M"
+    new "{#file_time}%Y-%m-%d, %H:%M"
 

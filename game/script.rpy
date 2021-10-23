@@ -30,13 +30,14 @@ define cantlight_msg = _("I don't have everything yet.")
 label start:
     $ _game_menu_screen = "preferences"
     $_confirm_quit = False
+    image snow = Snow("images/snowflake.png")
+    image heavy_snow = Snow("images/snowflake.png", 200, 500)
     if (not persistent.languages):
         $ persistent.languages = set()
     if (not persistent.times_played):
         $ persistent.times_played = 0
     $ renpy.save_persistent()
 
-    play music "music/Unsolved.mp3" loop
     $ current_room = "CabinInterior"
     $ previous_room = "CabinInterior"
     $ renpy.show_screen(current_room + "Screen")
@@ -55,7 +56,8 @@ label start:
 
 label lit_fire:
     "It's time."
-    play sound "sfx/light-fire.ogg"
+    play sound "<loop 3.0>sfx/light-fire.ogg" loop
+    scene cabin_lit
     # TODO: cozy fire image here
     "Ahh, this is perfect. Thanks to the fire I’m nice and warm. Nothing like a good, cozy fire to lift your spirits!"
     if (_preferences.language == None):
@@ -80,6 +82,7 @@ screen choose_language_screen:
         xalign 0.5
         spacing 5
         yalign 0.25
+        xsize 1000
         if (None in persistent.languages):
             textbutton "English" action [Language(None), Return()] style "choice_chosen" xsize 500 ysize 70
         else:

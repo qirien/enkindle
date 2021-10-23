@@ -57,32 +57,6 @@ translate esperanto strings:
     old "What language would you like?"
     new ""
 
-    # game/script.rpy:45
-    old "English"
-    new "English"
-
-    # game/script.rpy:45
-    old "Español"
-    new "Español"
-
-    # game/script.rpy:45
-    old "Esperanto"
-    new "Esperanto"
-
-    # game/script.rpy:45
-    old "Français"
-    new "Français"
-
-    # game/script.rpy:45
-    old "Deutsch"
-    new "Deutsch"
-
-translate esperanto strings:
-
-    # game/script.rpy:47
-    old "{font=fonts/unifont.ttf}日本語{/font}"
-    new "{font=fonts/unifont.ttf}日本語{/font}"
-
 # TODO: Translation updated at 2021-10-15 20:27
 
 translate esperanto strings:
@@ -90,20 +64,23 @@ translate esperanto strings:
     # game/script.rpy:18
     old "The wolves must be hunting. How cute! They know better than to come near us, I’m sure."
     new "Tiuj estas lupoj. Ili ĉasos ĉi tie baldaŭ. Ili manĝos multajn ĉinokte."
+# TODO: Translation updated at 2021-10-21 14:10
+
+translate esperanto strings:
 
     # game/script.rpy:19
-    old "I need kindling."
-    new ""
+    old "I don't have everything yet."
+    new "Mi ne havas ĉion, kiujn mi bezonas"
 
-    # game/script.rpy:20
-    old "I need something to make sparks."
-    new ""
+    # game/script.rpy:60
+    old "Which language?"
+    new "Which language?"
 
-    # game/script.rpy:21
-    old "I need something steel to strike sparks."
-    new ""
+    # game/script.rpy:60
+    old "English"
+    new "English"
 
-    # game/script.rpy:22
-    old "I need wood to burn."
-    new ""
+    # game/script.rpy:60
+    old "Esperanto"
+    new "Esperanto"
 
