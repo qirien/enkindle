@@ -2,8 +2,6 @@
 init -100:
     # TODO: this doesn't work for inventory items.
     transform highlight_imagebutton():
-        on default:
-            additive 0.0
         on hover:
             additive 0.2
         on idle:

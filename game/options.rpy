@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "0.7"
+define config.version = "0.9"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
@@ -42,11 +42,13 @@ French by Wes Landaker
 
 Japanese by Clarissa Helps
 
-Spanish by Andrea Landaker
+Spanish by Andrea Landaker and Cynthia Pedrotty
 
 Dutch by Milo
 
 Korean by Hyunhee Bae
+
+Thai by Prakaikaew C Manokhum
 
 Shakespearean by Andrea Landaker
 

@@ -49,8 +49,9 @@ screen SnowyHillScreen():
                 action AddItem("kindling") 
                 pos (200, 700)
                 at highlight_imagebutton
-        if (has_fire_items()):
-            add "heavy_snow"
-        else:
-            add "snow"                
+        if (snow_enabled):
+            if (has_fire_items()):
+                add "heavy_snow"
+            else:
+                add "snow"                
         use inventory_screen
