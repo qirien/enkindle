@@ -70,7 +70,7 @@ label lit_fire:
     $ persistent.times_played += 1
     $ renpy.save_persistent()
 
-    if ((persistent.times_played >= 3) and (len(persistent.languages) >= 3)):
+    if ((persistent.times_played >= 5) and (len(persistent.languages) >= 5)):
         call postlude
 
     $ renpy.full_restart()
