@@ -1,12 +1,15 @@
-﻿# The script of the game goes in this file.
+﻿# TODO: Change name to Enkindle.
+
+# The script of the game goes in this file.
 define language_name_map = {
     None:"English", 
     "esperanto":"Esperanto", 
     "nihongo":"{font=[japanese_font]}日本語{/font}",
-    "french":"Français",
+    "francais":"Français",
     "espanol":"Español",
-    "korean":"{font=[korean_font]}한국어{/font}",
-    "thai":"{font=[thai_font]}ภาษาไทย{/font}"
+    "hangul":"{font=[korean_font]}한국어{/font}",
+    "thai":"{font=[thai_font]}ภาษาไทย{/font}",
+    "shakespeare":"Shakespearean"
     }
 
 # Variables that should be saved
@@ -24,17 +27,33 @@ define items = {
     "doll":_("My parents made this for me when I was little. It was on a shelf in my room, but now it's way out here..."),
     "flint":_("These rocks were from the ritual. They said they were just studying it; they never meant to actually perform the rite!")
 }
+
+# Define which ending image goes with which language
+define ending_image_map = {
+        None:"images/ending_warm.png",
+        "esperanto":"images/ending_dark.png",
+        "francais":"images/ending_neutral.png",
+        "nihongo":"images/ending_warm.png",
+        "deutsch":"images/ending_neutral.png",
+        "espanol":"images/ending_dark.png",
+        "dutch":"images/ending_blaze.png",
+        "hangul":"images/ending_dark.png",
+        "shakespearean":"images/ending_warm.png",
+        "thai":"images/ending_blaze.png"
+}
+default end_image = "images/ending_neutral.png"
 define wolf_description = _("I wonder if wolves have a language? Probably not. If they did, my parents would have known it.")
 define cantlight_msg = _("It looks like nothing happened, like there was no blast. I need to get a fire going in here if I want to destroy those books.")
 
-define snow_enabled = False
+define snow_enabled = True
 
 label start:
     scene cabininterior
     $ _game_menu_screen = "preferences"
     $_confirm_quit = False
-    image snow = Snow("images/snowflake.png")
-    image heavy_snow = Snow("images/snowflake.png", 200, 500)
+    image snow = SnowBlossom("images/snowflake.png")
+    image heavy_snow = SnowBlossom("images/snowflake.png", 50, 10, (100,300), (150, 400), True)
+    image ending_image = DynamicImage("[end_image]")
     if (not persistent.languages):
         $ persistent.languages = set()
     if (not persistent.times_played):
@@ -60,7 +79,8 @@ label start:
 label lit_fire:
     "My fingers are numb from the cold. I need this fire. I need to feel warm again." id light01
     play sound "<loop 3.0>sfx/light-fire.ogg" loop
-    scene cabin_lit # TODO: replace with new version
+    $ end_image = ending_image_map[_preferences.language]
+    scene ending_image # TODO: replace with new version
     "My parents were trying to work out how the ancient words might be pronounced. I never thought they would get it right. We never imagined those words could have...power." id light02
     "When that creature came out, I lost everything. All because of these stupid books. Now my family is lost, and the creature is missing too. What am I supposed to do now?" id light03
     if (_preferences.language == None):

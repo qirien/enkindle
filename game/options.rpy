@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Ignite")
+define config.name = _("Enkindle")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -40,7 +40,7 @@ Esperanto by Rachel Helps
 
 French by Wes Landaker
 
-Japanese by Clarissa Helps
+Japanese by Clarissa Helps and Misao Ford
 
 Spanish by Andrea Landaker and Cynthia Pedrotty
 
@@ -69,7 +69,7 @@ Art by Clarissa Helps
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "Ignite"
+define build.name = "Enkindle"
 
 
 ## Sounds and music ############################################################
@@ -174,7 +174,7 @@ default preferences.afm_time = 15
 ## This generally should not be changed, and if it is, should always be a
 ## literal string, not an expression.
 
-define config.save_directory = "Ignite-1633118577"
+define config.save_directory = "Enkindle-1633118577"
 define config.has_quicksave = False
 
 ## Icon ########################################################################
@@ -237,4 +237,4 @@ init python:
 ## The username and project name associated with an itch.io project, separated
 ## by a slash.
 
-# define build.itch_project = "qirien/ignite"
+# define build.itch_project = "qirien/enkindle"
