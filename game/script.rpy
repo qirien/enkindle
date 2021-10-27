@@ -1,15 +1,22 @@
-﻿# TODO: Change name to Enkindle.
+﻿# Enkindle is (c) 2021 by Metasepia Games, http://www.metasepiagames.com
+# This software is distributed under the GPL v3.0 license
+# (see LICENSE)
 
 # The script of the game goes in this file.
 define language_name_map = {
     None:"English", 
     "esperanto":"Esperanto", 
-    "nihongo":"{font=[japanese_font]}日本語{/font}",
     "francais":"Français",
+    "nihongo":"{font=[japanese_font]}日本語{/font}",
+    #"deutsch":"Deutsch",
     "espanol":"Español",
+    "nederlands":"Nederlands",
     "hangul":"{font=[korean_font]}한국어{/font}",
-    "thai":"{font=[thai_font]}ภาษาไทย{/font}",
-    "shakespeare":"Shakespearean"
+    "shakespearean":"Early Modern English",    
+    # some other language?
+    "thai":"{font=[thai_font]}ภาษาไทย{/font}"
+    # epilogue as separate language?
+    # emoji language?
     }
 
 # Variables that should be saved
@@ -36,7 +43,7 @@ define ending_image_map = {
         "nihongo":"images/ending_warm.png",
         "deutsch":"images/ending_neutral.png",
         "espanol":"images/ending_dark.png",
-        "dutch":"images/ending_blaze.png",
+        "nederlands":"images/ending_blaze.png",
         "hangul":"images/ending_dark.png",
         "shakespearean":"images/ending_warm.png",
         "thai":"images/ending_blaze.png"
@@ -117,13 +124,30 @@ label choose_language:
 
 screen choose_language_screen:
     style_prefix "choice"
-
+    vbox:
+        yalign 0.5
+        xalign 0.5
+        spacing 0
+        imagebutton:
+            idle "images/book_english.png"
+            action [Language(None), Return()]
+            at highlight_imagebutton
+        $ languages_available = renpy.known_languages()
+        for i in languages_available:
+            $ button_name = "images/book_" + i + ".png"
+            imagebutton:
+                idle button_name
+                action [Language(i), Return()]
+                at highlight_imagebutton
+    
+    
+screen old_language_screen:
     vpgrid:
         cols 2
         xalign 0.5
         spacing 5
         yalign 0.25
-        xsize 1000
+        xsize 1000        
         if (None in persistent.languages):
             textbutton "English" action [Language(None), Return()] style "choice_chosen" xsize 500 ysize 70
         else:
