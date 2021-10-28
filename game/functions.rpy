@@ -18,6 +18,10 @@ init -100:
     transform icon_size:
         xsize 100
         ysize 100
+    
+    transform zoomoutfromcabin:
+        zoom 1.5 xalign 0.8 yalign 0.6
+        linear 5.0 zoom 1.0
 
     define light_gray = "#aaaaaa"
     define japanese_font = "fonts/NotoSerifJP-Regular.otf"

@@ -3,10 +3,14 @@ init python:
 
 screen inventory_screen():
     vbox:            
-        yalign 0.0
+        yalign 1.0
         xfill True
         $ tooltip = GetTooltip()
 
+        if tooltip:
+            text "[tooltip]" color "#FFFFFF" outlines [(2, "#000000", 1, 1)]
+        else:
+            text " "        
         hbox:        
             spacing 10
             #label "Inventory"
@@ -26,8 +30,4 @@ screen inventory_screen():
                         tooltip desc
                         action NullAction()
                         at icon_size, highlight_imagebutton
-
-        if tooltip:
-            text "[tooltip]" color "FFFFFF"
-        else:
-            text " "                        
+                

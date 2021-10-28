@@ -87,9 +87,11 @@ label lit_fire:
     "My fingers are numb from the cold. I need this fire. I need to feel warm again." id light01
     play sound "<loop 3.0>sfx/light-fire.ogg" loop
     $ end_image = ending_image_map[_preferences.language]
-    scene ending_image
+    scene ending_image at zoomoutfromcabin
     "My parents were trying to work out how the ancient words might be pronounced. I never thought they would get it right. We never imagined those words could have...power." id light02
     "When that creature came out, I lost everything. All because of these stupid books. Now my family is lost, and the creature is missing too. What am I supposed to do now?" id light03
+    window auto hide
+    $ renpy.pause()
     if (_preferences.language == None):
         $ persistent.languages.add("english")
     else:

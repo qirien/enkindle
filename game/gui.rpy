@@ -100,7 +100,7 @@ define gui.textbox_height = 278
 
 ## The placement of the textbox vertically on the screen. 0.0 is the top, 0.5 is
 ## center, and 1.0 is the bottom.
-define gui.textbox_yalign = 1.0
+define gui.textbox_yalign = 0.87
 
 
 ## The placement of the speaking character's name, relative to the textbox.
@@ -437,7 +437,7 @@ init python:
         ## Adjust the location of the textbox.
         gui.textbox_height = 360
         gui.name_xpos = 120
-        gui.dialogue_xpos = 135
+        gui.dialogue_xpos = 235
         gui.dialogue_width = 1650
 
         ## Change the size and spacing of various things.
