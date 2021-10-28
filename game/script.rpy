@@ -43,7 +43,7 @@ define ending_image_map = {
         "nihongo":"images/ending_warm.png",
         "deutsch":"images/ending_neutral.png",
         "espanol":"images/ending_dark.png",
-        "nederlands":"images/ending_blaze.png",
+        "nederlands":"images/ending_warm.png",
         "hangul":"images/ending_dark.png",
         "shakespearean":"images/ending_warm.png",
         "thai":"images/ending_blaze.png"
@@ -87,7 +87,7 @@ label lit_fire:
     "My fingers are numb from the cold. I need this fire. I need to feel warm again." id light01
     play sound "<loop 3.0>sfx/light-fire.ogg" loop
     $ end_image = ending_image_map[_preferences.language]
-    scene ending_image # TODO: replace with new version
+    scene ending_image
     "My parents were trying to work out how the ancient words might be pronounced. I never thought they would get it right. We never imagined those words could have...power." id light02
     "When that creature came out, I lost everything. All because of these stupid books. Now my family is lost, and the creature is missing too. What am I supposed to do now?" id light03
     if (_preferences.language == None):
@@ -97,8 +97,8 @@ label lit_fire:
     $ persistent.times_played += 1
     $ renpy.save_persistent()
 
-    if ((persistent.times_played >= 5) and (len(persistent.languages) >= 5)):
-        call postlude
+    #if ((persistent.times_played >= 5) and (len(persistent.languages) >= 5)):
+    #    call postlude
 
     $ renpy.full_restart()
     return
@@ -124,21 +124,50 @@ label choose_language:
 
 screen choose_language_screen:
     style_prefix "choice"
-    vbox:
+    $ book_split = len(renpy.known_languages()) // 2
+    $ languages_available = renpy.known_languages()    
+    hbox:
         yalign 0.5
         xalign 0.5
-        spacing 0
-        imagebutton:
-            idle "images/book_english.png"
-            action [Language(None), Return()]
-            at highlight_imagebutton
-        $ languages_available = renpy.known_languages()
-        for i in languages_available:
-            $ button_name = "images/book_" + i + ".png"
+        vbox:
+            yalign 0.5
+            xalign 0.5
+            spacing 0
+            $ button_name = "images/book_english.png"
+            if ("english" in persistent.languages): 
+                $ book_image = im.Grayscale(button_name)
+            else:
+                $ book_image = Image(button_name)
             imagebutton:
-                idle button_name
-                action [Language(i), Return()]
+                idle book_image
+                action [Language(None), Return()]
                 at highlight_imagebutton
+            for i in range(0,book_split):
+                $ lang = list(languages_available)[i]
+                $ button_name = "images/book_" + lang + ".png"
+                if (lang in persistent.languages): 
+                    $ book_image = im.Grayscale(button_name)
+                else:
+                    $ book_image = Image(button_name)
+                imagebutton:
+                    idle book_image
+                    action [Language(lang), Return()]
+                    at highlight_imagebutton
+        vbox:
+            yalign 0.5
+            xalign 0.5
+            spacing 0
+            for i in range(book_split,len(languages_available)):
+                $ lang = list(languages_available)[i]
+                $ button_name = "images/book_" + lang + ".png"
+                if (lang in persistent.languages): 
+                    $ book_image = im.Grayscale(button_name)
+                else:
+                    $ book_image = Image(button_name)
+                imagebutton:
+                    idle book_image
+                    action [Language(lang), Return()]
+                    at highlight_imagebutton           
     
     
 screen old_language_screen:

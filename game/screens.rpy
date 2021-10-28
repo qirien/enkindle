@@ -266,33 +266,43 @@ style choice_chosen_text is choice_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
-# TODO: replace with images
 screen navigation():
 
     style_prefix "navigation"
 
-    if main_menu:
+    vbox:
+        spacing 50
+        yalign 0.5
+        if main_menu:
+            imagebutton:
+                idle "gui/start.png"
+                action Start()
+                at alpha_imagebutton
+        null height 100
         imagebutton:
-            idle "gui/right_arrow.png"
-            action Start()
-            xpos 100
-            ypos 700
+            idle "gui/preferences.png" 
+            action ShowMenu("preferences")
+            xalign 0.5
             at alpha_imagebutton
-    else:
+
         imagebutton:
-            idle "gui/right_arrow.png"
-            action Return()
-            xpos 100
-            ypos 700
-            at alpha_imagebutton        
+            idle "gui/question.png"
+            action ShowMenu("about")
+            xalign 0.5
+            at alpha_imagebutton
 
-    textbutton "Preferences" action ShowMenu("preferences") xpos 100 ypos 400
-
-    textbutton "About" action ShowMenu("about") xpos 100 ypos 500
-
-    if not main_menu:
-        textbutton "Main Menu" action MainMenu() xpos 100 ypos 600
-
+        if not main_menu:
+            imagebutton:
+                idle "gui/up_arrow.png"
+                action MainMenu(confirm=False)
+                xalign 0.5
+                at alpha_imagebutton
+            imagebutton:
+                idle "gui/right_arrow.png"
+                action Return()
+                xalign 0.5
+                at alpha_imagebutton        
+        
 
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
@@ -316,7 +326,14 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    add gui.main_menu_background
+    if (len(persistent.languages)>= 6):
+        add "images/title03.png"
+    elif (len(persistent.languages)>= 4):
+        add "images/title02.png"        
+    elif (len(persistent.languages) >= 2):
+        add "images/title01.png"
+    else:
+        add gui.main_menu_background
 
     ## This empty frame darkens the main menu.
     frame:
@@ -331,20 +348,21 @@ screen main_menu():
         vbox:
             style "main_menu_vbox"
 
+            null height 50
+            
             text "[config.name!t]":
                 style "main_menu_title"
 
             text "[config.version]":
                 style "main_menu_version"
 
-        if (persistent.times_played):
-            text "[persistent.times_played]" xpos 1800 ypos 1000 style "main_menu_version"
-
 
 style main_menu_frame is empty
 style main_menu_vbox is vbox
 style main_menu_text is gui_text
-style main_menu_title is main_menu_text
+style main_menu_title is main_menu_text:
+    font "fonts/FLORANTE.ttf"
+
 style main_menu_version is main_menu_text
 
 style main_menu_frame:
@@ -680,8 +698,6 @@ screen preferences():
                 textbutton "Mute Sound":
                     action Preference("mixer sound mute", "toggle")
                     style "mute_all_button"
-                use choose_language_screen
-
 
 style pref_label is gui_label
 style pref_label_text is gui_label_text

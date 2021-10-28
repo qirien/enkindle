@@ -55,7 +55,7 @@ define gui.interface_text_color = u'#404040'
 ## Fonts and Font Sizes ########################################################
 
 ## The font used for in-game text.
-define gui.text_font = "DejaVuSans.ttf"
+define gui.text_font = "fonts/DejaVuSerif.ttf"
 
 ## The font used for character names.
 define gui.name_text_font = "DejaVuSans.ttf"
@@ -74,18 +74,19 @@ define gui.interface_text_size = 33
 
 ## The size of labels in the game's user interface.
 define gui.label_text_size = 36
+define gui.label_text_font = "fonts/FLORANTE.ttf"
 
 ## The size of text on the notify screen.
 define gui.notify_text_size = 24
 
 ## The size of the game's title.
-define gui.title_text_size = 75
+define gui.title_text_size = 175
 
 
 ## Main and Game Menus #########################################################
 
 ## The images used for the main and game menus.
-define gui.main_menu_background = "images/CabinInterior.png"
+define gui.main_menu_background = "images/title00.png"
 define gui.game_menu_background = "gui/game_menu.png"
 
 
@@ -275,7 +276,7 @@ define gui.page_spacing = 0
 define gui.slot_spacing = 15
 
 ## The position of the main menu text.
-define gui.main_menu_text_xalign = 1.0
+define gui.main_menu_text_xalign = 0.5
 
 
 ## Frames ######################################################################

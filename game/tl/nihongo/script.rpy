@@ -1,6 +1,7 @@
 ﻿# TODO: Translation updated at 2021-10-25 22:13
 translate nihongo style default:
     font "fonts/NotoSerifJP-Regular.otf"
+    size 36
 
 # game/script.rpy:50
 translate nihongo start01:

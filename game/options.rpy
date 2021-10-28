@@ -34,33 +34,31 @@ This game is by {a=http://metasepiagames.com}Metasepia Games{/a} and is released
 
 To add more translations, please contact us at {a=mailto:metasepia@icecavern.net}metasepia@icecavern.net{/a}
 
-Content by Clarissa Helps and Andrea Landaker
+Original Text by Clarissa Helps and Andrea Landaker
 
-Esperanto by Rachel Helps
+Esperanto Translation by Rachel Helps
 
-French by Wes Landaker
+French Translation by Wes Landaker
 
-Japanese by Clarissa Helps and Misao Ford
+Japanese Translation by Clarissa Helps and Misao Ford
 
-Spanish by Andrea Landaker and Cynthia Pedrotty
+Spanish Translation by Andrea Landaker and Cynthia Pedrotty
 
-Dutch by Milo
+Dutch Translation by Milo
 
-Korean by Hyunhee Bae
+Korean Translation by Hyunhee Bae
 
-Thai by Prakaikaew C Manokhum
+Thai Translation by Prakaikaew C Manokhum
 
-Shakespearean by Andrea Landaker
+Early Modern English Translation by Andrea Landaker
 
 Music by Nicolas Jeudy, {a=http://darkfantasystudio.com/}Dark Fantasy Studio{/a}
 
 Sound Effects by {a=http://www.soundjay.com}SoundJay{/a} and {a=http://freesound.org}Freesound{/a}
 
-Programming by Andrea Landaker
-
 Art by Clarissa Helps
 
-
+Programming by Andrea Landaker
 
 """)
 
