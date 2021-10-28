@@ -326,7 +326,13 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    if (len(persistent.languages)>= 6):
+    if (list(persistent.endings.keys())[-1:] == ["burn"]):
+        add "images/ending_blaze.png"
+    elif (list(persistent.endings.keys())[-1:] == ["release"]):
+        add "images/demon_eyes.png"
+    elif (list(persistent.endings.keys())[-1:] == ["banish"]):
+        add "images/ending_warm.png"
+    elif (len(persistent.languages)>= EPILOGUE_TIME):
         add "images/title03.png"
     elif (len(persistent.languages)>= 4):
         add "images/title02.png"        

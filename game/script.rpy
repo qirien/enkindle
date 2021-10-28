@@ -15,9 +15,10 @@ define language_name_map = {
     "shakespearean":"Early Modern English",    
     # some other language?
     "thai":"{font=[thai_font]}ภาษาไทย{/font}"
-    # epilogue as separate language?
     # emoji language?
     }
+
+define EPILOGUE_TIME = 7
 
 # Variables that should be saved
 default current_room = "CabinInterior"
@@ -37,7 +38,7 @@ define items = {
 
 # Define which ending image goes with which language
 define ending_image_map = {
-        None:"images/ending_warm.png",
+        None:"images/ending_neutral.png",
         "esperanto":"images/ending_dark.png",
         "francais":"images/ending_neutral.png",
         "nihongo":"images/ending_warm.png",
@@ -49,11 +50,23 @@ define ending_image_map = {
         "thai":"images/ending_blaze.png"
 }
 default end_image = "images/ending_neutral.png"
+image white = Solid("#fff")
 define wolf_description = _("I wonder if wolves have a language? Probably not. If they did, my parents would have known it.")
 define cantlight_msg = _("It looks like nothing happened, like there was no blast. I need to get a fire going in here if I want to destroy those books.")
 
 # TODO: Fix this, it disappears when the Say screen is shown
 define snow_enabled = False
+
+init -10 python:
+    import collections
+    if (not persistent.endings):
+        persistent.endings = collections.OrderedDict()    
+    if (not persistent.languages):
+        persistent.languages = set()
+    if (not persistent.times_played):
+        persistent.times_played = 0
+    renpy.save_persistent()
+
 
 label start:
     scene cabininterior with fade
@@ -62,11 +75,6 @@ label start:
     image snow = SnowBlossom("images/snowflake.png")
     image heavy_snow = SnowBlossom("images/snowflake.png", 50, 10, (100,300), (150, 400), True)
     image ending_image = DynamicImage("[end_image]")
-    if (not persistent.languages):
-        $ persistent.languages = set()
-    if (not persistent.times_played):
-        $ persistent.times_played = 0
-    $ renpy.save_persistent()
 
     $ current_room = "CabinInterior"
     $ previous_room = "CabinInterior"
@@ -106,19 +114,19 @@ label lit_fire:
     $ renpy.full_restart()
     return
 
-label postlude hide:
-    "I was going to burn the books, but I ended up reading them..."
-    menu:
-        "What should I do with the books?"
-        "Burn them.":
-            "This knowledge is too dangerous. I don't want anyone else to lose everything the way I did."
-            # TODO: burning VFX?
-        "Keep them.":
-            "Even though they cost me everything, I can't destroy the knowledge they hold."
-            "In fact, they might be the only way to discover how to stop the... creature."
-            "Or maybe not. But either way, I don't want to lose what my parents worked hard to uncover."
+# label postlude hide:
+#     "I was going to burn the books, but I ended up reading them..."
+#     menu:
+#         "What should I do with the books?"
+#         "Burn them.":
+#             "This knowledge is too dangerous. I don't want anyone else to lose everything the way I did."
+#             # TODO: burning VFX?
+#         "Keep them.":
+#             "Even though they cost me everything, I can't destroy the knowledge they hold."
+#             "In fact, they might be the only way to discover how to stop the... creature."
+#             "Or maybe not. But either way, I don't want to lose what my parents worked hard to uncover."
 
-    return
+#     return
 
 label choose_language:
     call screen choose_language_screen()
@@ -171,23 +179,12 @@ screen choose_language_screen:
                     idle book_image
                     action [Language(lang), Return()]
                     at highlight_imagebutton           
-    
-    
-screen old_language_screen:
-    vpgrid:
-        cols 2
-        xalign 0.5
-        spacing 5
-        yalign 0.25
-        xsize 1000        
-        if (None in persistent.languages):
-            textbutton "English" action [Language(None), Return()] style "choice_chosen" xsize 500 ysize 70
-        else:
-            textbutton "English" action [Language(None), Return()] xsize 500 ysize 70
-        $ languages_available = renpy.known_languages()
-        for i in languages_available:
-            $ nice_name = language_name_map[i]
-            if (i in persistent.languages): #This allows ths user to see which choices they have made in the past            
-                textbutton nice_name action [Language(i), Return()] style "choice_chosen" xsize 500 ysize 70
-            else:
-                textbutton nice_name action [Language(i), Return()] xsize 500 ysize 70
+            if (len(persistent.languages) >= EPILOGUE_TIME):
+                if (len(persistent.endings) >= 3):
+                    $ book_image = im.Grayscale("images/book_epilogue.png")
+                else:
+                    $ book_image = "images/book_epilogue.png"
+                imagebutton:
+                    idle book_image
+                    action [Language(None), Call("epilogue")]
+                    at highlight_imagebutton 
