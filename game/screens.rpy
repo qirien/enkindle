@@ -774,6 +774,19 @@ style slider_vbox:
 ## Additional screens
 ################################################################################
 
+screen snowfall():
+    layer "overlay"
+    zorder 150
+    if (snow_enabled):
+        if (current_room != "CabinInterior"):
+            if (has_fire_items()):
+                add "heavy_snow"
+                text "heavy snow"
+            else:
+                add "snow"
+                text "Snow"
+
+# this doesn't seem to work?? $ config.overlay_screens.append("snowfall")
 
 ## Confirm screen ##############################################################
 ##

@@ -84,7 +84,7 @@ translate shakespearean strings:
 
     # game/script.rpy:28
     old "My parents made this for me when I was little. It was on a shelf in my room, but now it's way out here..."
-    new "A puppet to the plots of men am I. O, fie!"
+    new "A puppet to the plots of men am I! O, fie!"
 
     # game/script.rpy:28
     old "These rocks were from the ritual. They said they were just studying it; they never meant to actually perform the rite!"

@@ -90,6 +90,7 @@ translate thai strings:
     new "ฉันไม่รู้หรอกว่าตุ๊กตาตัวนี้เป็นของเหยื่อคนไหนกันแต่เจ้ายักษ์นั่นจะต้องถูกโค่นลงให้ได้"
 
     # game/script.rpy:28
+    # TODO: This is too long for the window....
     old "These rocks were from the ritual. They said they were just studying it; they never meant to actually perform the rite!"
     new "ฉันจุดให้เกิดประกายไฟด้วยหินนี่ได้แต่ฉันจะทำยังไงให้เจ้ายักษ์ยังคงหลับระหว่างเกิดไฟไหม้ล่ะ"
 

@@ -19,11 +19,12 @@ screen inventory_screen():
                 if (items[i["name"]]):
                     $ full_desc = items[i["name"]]
                     $ full_desc_translated = renpy.translate_string(full_desc)
-                    $ splitted = re.split('(\u\!|\?|\.|。|？|\n)',full_desc_translated)
-                    if len(splitted) <= 1:
-                        $ desc = splitted[0].strip()
-                    else:
-                        $ desc = (splitted[0] + splitted[1]).strip()
+                    $ splitted = re.split('(\!|\?|\.|。|？|！|\n)',full_desc_translated)
+                    $ desc = ''.join(splitted[0:2]).strip()
+                    # if len(splitted) <= 1:
+                    #     $ desc = splitted[0].strip()
+                    # else:
+                    #     $ desc = (splitted[0] + splitted[1]).strip()
                     imagebutton:
                         sensitive in_room
                         idle "images/" + i["name"]+".png"

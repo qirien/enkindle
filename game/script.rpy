@@ -52,10 +52,11 @@ default end_image = "images/ending_neutral.png"
 define wolf_description = _("I wonder if wolves have a language? Probably not. If they did, my parents would have known it.")
 define cantlight_msg = _("It looks like nothing happened, like there was no blast. I need to get a fire going in here if I want to destroy those books.")
 
-define snow_enabled = True
+# TODO: Fix this, it disappears when the Say screen is shown
+define snow_enabled = False
 
 label start:
-    scene cabininterior
+    scene cabininterior with fade
     $ _game_menu_screen = "preferences"
     $_confirm_quit = False
     image snow = SnowBlossom("images/snowflake.png")

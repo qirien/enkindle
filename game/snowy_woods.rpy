@@ -43,10 +43,4 @@ screen SnowyWoodsScreen():
                 action AddItem("wood")
                 pos (845, 644)
                 at highlight_imagebutton
-
-        if (snow_enabled):
-            if (has_fire_items()):
-                add "heavy_snow"
-            else:
-                add "snow"
         use inventory_screen

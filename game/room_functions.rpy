@@ -12,7 +12,8 @@ label ChangeRoom:
     #Enter the scene
     $ in_room = False
     $ renpy.show_screen(current_room + "Screen")
- 
+    $ renpy.show_screen("snowfall")
+
     #React to entrance
     if current_room != previous_room:
         $ check_intro_reactions(current_room)

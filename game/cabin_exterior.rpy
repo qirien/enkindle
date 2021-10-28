@@ -36,9 +36,4 @@ screen CabinExteriorScreen():
                 xalign 0.8
                 yalign 0.8
                 at highlight_imagebutton
-        if (snow_enabled):
-            if (has_fire_items()):
-                add "heavy_snow"
-            else:
-                add "snow"
         use inventory_screen

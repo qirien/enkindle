@@ -80,7 +80,7 @@ define gui.label_text_font = "fonts/FLORANTE.ttf"
 define gui.notify_text_size = 24
 
 ## The size of the game's title.
-define gui.title_text_size = 175
+define gui.title_text_size = 120
 
 
 ## Main and Game Menus #########################################################
