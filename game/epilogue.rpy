@@ -1,4 +1,5 @@
 label epilogue:
+    play music "music/Evidence.mp3" fadein 5.0
     scene cabininterior with fade
     "I read through the books they left behind. The stories they contained were strange, but mundane."
     "Still, as I read them I could feel my mind opening. Something was forming there. Like a thought I couldn’t recall, or a memory full of emotion and blurs."
@@ -45,6 +46,7 @@ label epilogue:
             "I see it for what it is now. A weak, crawling, grasping whisper that tried to creep into my mind and breed."
             "I know it must be destroyed. I have to tell this foul thing to leave and never come back. I'll choose my words carefully..."
             menu banish_menu:
+                # TODO: only have to redo ones you got wrong
                 "Begone":
                     menu:      
                         "Begone..."                  

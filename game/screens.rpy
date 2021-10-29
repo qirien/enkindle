@@ -359,15 +359,13 @@ screen main_menu():
             text "[config.name!t]":
                 style "main_menu_title"
 
-            text "[config.version]":
-                style "main_menu_version"
-
 
 style main_menu_frame is empty
 style main_menu_vbox is vbox
 style main_menu_text is gui_text
 style main_menu_title is main_menu_text:
     font "fonts/FLORANTE.ttf"
+    outlines [(1, "#ecda88", 1, 1)]
 
 style main_menu_version is main_menu_text
 
@@ -779,20 +777,6 @@ style slider_vbox:
 ################################################################################
 ## Additional screens
 ################################################################################
-
-screen snowfall():
-    layer "overlay"
-    zorder 150
-    if (snow_enabled):
-        if (current_room != "CabinInterior"):
-            if (has_fire_items()):
-                add "heavy_snow"
-                text "heavy snow"
-            else:
-                add "snow"
-                text "Snow"
-
-# this doesn't seem to work?? $ config.overlay_screens.append("snowfall")
 
 ## Confirm screen ##############################################################
 ##

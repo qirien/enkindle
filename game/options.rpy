@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "0.9"
+define config.version = "1.0"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
@@ -91,7 +91,7 @@ define config.has_voice = False
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-define config.main_menu_music = ["music/Unsolved.mp3", "<silence 10.0>", "music/Inspector.mp3", "<silence 10.0>"]
+define config.main_menu_music = ["music/Unsolved.mp3", "<silence 30.0>", "music/Inspector.mp3", "<silence 30.0>"]
 
 
 ## Transitions #################################################################
@@ -216,7 +216,7 @@ init python:
     ## To archive files, classify them as 'archive'.
 
     # build.classify('game/**.png', 'archive')
-    # build.classify('game/**.jpg', 'archive')
+    build.classify('game/music/**.mp3', 'archive')
 
     ## Files matching documentation patterns are duplicated in a mac app build,
     ## so they appear in both the app and the zip file.

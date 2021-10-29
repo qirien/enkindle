@@ -92,7 +92,7 @@ translate espanol strings:
 
     # game/script.rpy:45
     old "I wonder if wolves have a language? Probably not. If they did, my parents would have known it."
-    new "¿¡Es el monstruo?! No, no, son solamente lobos."
+    new "¡¿Es el monstruo?! No, no, son solamente lobos."
 
     # game/script.rpy:46
     old "It looks like nothing happened, like there was no blast. I need to get a fire going in here if I want to destroy those books."

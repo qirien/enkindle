@@ -54,8 +54,7 @@ image white = Solid("#fff")
 define wolf_description = _("I wonder if wolves have a language? Probably not. If they did, my parents would have known it.")
 define cantlight_msg = _("It looks like nothing happened, like there was no blast. I need to get a fire going in here if I want to destroy those books.")
 
-# TODO: Fix this, it disappears when the Say screen is shown
-define snow_enabled = False
+define snow_enabled = True
 
 init -10 python:
     import collections
@@ -72,14 +71,14 @@ label start:
     scene cabininterior with fade
     $ _game_menu_screen = "preferences"
     $_confirm_quit = False
-    image snow = SnowBlossom("images/snowflake.png")
-    image heavy_snow = SnowBlossom("images/snowflake.png", 50, 10, (100,300), (150, 400), True)
+    image snow = SnowBlossom("images/snowflake.png", 50, 20, (50,300), fast=True)
+    image heavy_snow = SnowBlossom("images/snowflake.png", 200, 20, (100,250), (100, 200), fast=True)
     image ending_image = DynamicImage("[end_image]")
 
     $ current_room = "CabinInterior"
     $ previous_room = "CabinInterior"
 
-    call choose_language
+    call choose_language from _call_choose_language
     
     $ renpy.show_screen(current_room + "Screen")
     "...They're gone. Everyone's gone. My body aches, but I'm still alive." id start01
@@ -114,19 +113,16 @@ label lit_fire:
     $ renpy.full_restart()
     return
 
-# label postlude hide:
-#     "I was going to burn the books, but I ended up reading them..."
-#     menu:
-#         "What should I do with the books?"
-#         "Burn them.":
-#             "This knowledge is too dangerous. I don't want anyone else to lose everything the way I did."
-#             # TODO: burning VFX?
-#         "Keep them.":
-#             "Even though they cost me everything, I can't destroy the knowledge they hold."
-#             "In fact, they might be the only way to discover how to stop the... creature."
-#             "Or maybe not. But either way, I don't want to lose what my parents worked hard to uncover."
+screen snowfall():
+    zorder 150
+    showif (snow_enabled):
+        showif (current_room != "CabinInterior"):
+            # if (has_fire_items()):
+            #     add "heavy_snow"
+            # else:
+            add "snow"
 
-#     return
+# this doesn't seem to work?? $ config.overlay_screens.append("snowfall")
 
 label choose_language:
     call screen choose_language_screen()

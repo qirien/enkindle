@@ -92,7 +92,7 @@ translate thai strings:
     # game/script.rpy:28
     # TODO: This is too long for the window....
     old "These rocks were from the ritual. They said they were just studying it; they never meant to actually perform the rite!"
-    new "ฉันจุดให้เกิดประกายไฟด้วยหินนี่ได้แต่ฉันจะทำยังไงให้เจ้ายักษ์ยังคงหลับระหว่างเกิดไฟไหม้ล่ะ"
+    new "ฉันจุดให้เกิดประกายไฟด้วยหินนี่ได้ แต่ฉันจะทำยังไงให้เจ้ายักษ์ยังคงหลับระหว่างเกิดไฟไหม้ล่ะ"
 
     # game/script.rpy:52
     old "I wonder if wolves have a language? Probably not. If they did, my parents would have known it."

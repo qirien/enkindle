@@ -80,7 +80,7 @@ translate francais strings:
 
     # game/script.rpy:21
     old "We usually snuggle up with this blanket on the couch. Could the blast have thrown it this far?"
-    new "Cela était gardé dans la cabane au début. Après la première année, je ne pouvais plus supporter de la regarder, alors je l'ai jetée dehors. Parfois je fais semblant de juste l'avoir trouvée, parfois j'essaye de la débarrasser par donner aux animaux. Ça ne fait pas de différence ; rien ne change."
+    new "Cela était gardé dans la cabane au début. Après la première année, je ne pouvais plus supporter de la regarder, alors je l'ai jetée dehors. Parfois je fais semblant de juste l'avoir trouvée, parfois j'essaye de la débarrasser. Ça ne fait pas de différence ; rien ne change."
 
     # game/script.rpy:21
     old "My parents made this for me when I was little. It was on a shelf in my room, but now it's way out here..."
