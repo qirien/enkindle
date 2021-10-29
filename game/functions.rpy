@@ -29,6 +29,20 @@ init -100:
     define thai_font = "fonts/NotoSerifThai-Regular.ttf"
 
 init python:
+    import collections
+    def reset_persistent_data():
+        persistent._clear()        
+        persistent.endings = collections.OrderedDict()    
+        persistent.languages = set()
+        persistent.times_played = 0
+        renpy.save_persistent()
+
+label reset_data:
+    $ reset_persistent_data()
+    $ renpy.full_restart()
+    return
+
+init python:
     def has_fire_items():
         global inventory
         return (inventory.hasItem("kindling") and inventory.hasItem("flint") and inventory.hasItem("axe") and inventory.hasItem("wood"))

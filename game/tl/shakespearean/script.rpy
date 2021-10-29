@@ -64,7 +64,7 @@ translate shakespearean strings:
 
     # game/script.rpy:28
     old "Our axe. Mom and dad used to have contests to see who could chop wood faster. We'd keep score, counting in a different language every time."
-    new "The axe's edge cuts deep, yea, to the heart\nYour treach'ry shall not be forgot by me."
+    new "The axe's edge cuts deep, yea, to the heart\nThy treach'ry shall not be forgot by me."
 
     # game/script.rpy:28
     old "I might need this kindling. Normal books catch fire easily, but these books might have tricks up their sleeves."

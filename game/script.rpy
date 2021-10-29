@@ -54,7 +54,7 @@ image white = Solid("#fff")
 define wolf_description = _("I wonder if wolves have a language? Probably not. If they did, my parents would have known it.")
 define cantlight_msg = _("It looks like nothing happened, like there was no blast. I need to get a fire going in here if I want to destroy those books.")
 
-define snow_enabled = True
+define snow_enabled = True #False #for web build
 
 init -10 python:
     import collections
@@ -99,13 +99,14 @@ label lit_fire:
     "My parents were trying to work out how the ancient words might be pronounced. I never thought they would get it right. We never imagined those words could have...power." id light02
     "When that creature came out, I lost everything. All because of these stupid books. Now my family is lost, and the creature is missing too. What am I supposed to do now?" id light03
     window auto hide
-    $ renpy.pause()
+    $ renpy.notify("Saving Progress...")
     if (_preferences.language == None):
         $ persistent.languages.add("english")
     else:
         $ persistent.languages.add(_preferences.language)
     $ persistent.times_played += 1
-    $ renpy.save_persistent()
+    $ renpy.save_persistent()    
+    $ renpy.pause()
 
     #if ((persistent.times_played >= 5) and (len(persistent.languages) >= 5)):
     #    call postlude
@@ -129,7 +130,7 @@ label choose_language:
 
     return
 
-screen choose_language_screen:
+screen choose_language_screen():
     style_prefix "choice"
     $ book_split = len(renpy.known_languages()) // 2
     $ languages_available = renpy.known_languages()    

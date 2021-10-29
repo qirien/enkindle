@@ -334,9 +334,9 @@ screen main_menu():
         add "images/ending_warm.png"
     elif (len(persistent.languages)>= EPILOGUE_TIME):
         add "images/title03.png"
-    elif (len(persistent.languages)>= 4):
+    elif (len(persistent.languages)>= 3):
         add "images/title02.png"        
-    elif (len(persistent.languages) >= 2):
+    elif (len(persistent.languages) >= 1):
         add "images/title01.png"
     else:
         add gui.main_menu_background
@@ -694,14 +694,29 @@ screen preferences():
 
     use game_menu("Preferences", scroll="viewport"):
         style_prefix "pref"
-        hbox:
+        hbox:    
+            null width 200        
             vbox:
-                textbutton "Mute Music":
-                    action Preference("mixer music mute", "toggle")
-                    style "mute_all_button"
-                textbutton "Mute Sound":
-                    action Preference("mixer sound mute", "toggle")
-                    style "mute_all_button"
+                imagebutton:
+                    if (preferences.get_mute("music")):
+                        idle "gui/music_off.png"
+                        hover "gui/music_on.png"
+                    else:
+                        idle "gui/music_on.png"
+                        hover "gui/music_off.png"                        
+                    action Preference("music mute", "toggle")
+                imagebutton:
+                    if (preferences.get_mute("sfx")):
+                        idle "gui/sound_off.png"
+                        hover "gui/sound_on.png"
+                    else:
+                        idle "gui/sound_on.png"
+                        hover "gui/sound_off.png"                        
+                    action Preference("sound mute", "toggle")
+            null width 200
+            imagebutton:
+                auto "gui/delete_%s.png"
+                action Confirm("Are you sure you want to completely reset your save game?", Jump("reset_data"))
 
 style pref_label is gui_label
 style pref_label_text is gui_label_text
